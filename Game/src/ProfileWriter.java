@@ -6,14 +6,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ProfileWriter {
-    private Map<String, Integer> profilesMap = new HashMap<>();
+    private Map<String, Integer> profilesMap;
     private File profilesFile;
 
     public ProfileWriter(String user, Integer score) {
+        profilesMap = new HashMap<>();
+        makeFile();
+        writeToFile();
+    }
+
+    public void writeToMap(String user, Integer score) {
         profilesMap.put(user, score);
     }
 
-    public void makeFile() {
+    private void makeFile() {
         profilesFile = new File("userProfiles.txt");
         boolean fileMade = true;
         try {
@@ -34,6 +40,7 @@ public class ProfileWriter {
             FileWriter fileWriter = new FileWriter(profilesFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(profilesMap.toString());
+
         } catch (IOException e) {
             System.out.println("Could not write the profiles.");
             e.printStackTrace();
