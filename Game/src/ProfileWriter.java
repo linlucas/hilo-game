@@ -5,23 +5,23 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProfileWriter {
+class ProfileWriter {
     private Map<String, Integer> profilesMap;
     private File profilesFile;
 
-    public ProfileWriter(String user, Integer score) {
+    ProfileWriter() {
         profilesMap = new HashMap<>();
         makeFile();
-        writeToFile();
     }
 
-    public void writeToMap(String user, Integer score) {
+    void writeToMap(String user, Integer score) {
         profilesMap.put(user, score);
+        writeToFile();
     }
 
     private void makeFile() {
         profilesFile = new File("userProfiles.txt");
-        boolean fileMade = true;
+        boolean fileMade = false;
         try {
             if (!profilesFile.exists()) {
                 fileMade = profilesFile.createNewFile();
@@ -35,17 +35,25 @@ public class ProfileWriter {
         }
     }
 
-    public void writeToFile() {
+    private void writeToFile() {
+        BufferedWriter bufferedWriter = null;
         try {
             FileWriter fileWriter = new FileWriter(profilesFile);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter = new BufferedWriter(fileWriter);
+            System.out.println("writing to the file");
             bufferedWriter.write(profilesMap.toString());
 
         } catch (IOException e) {
             System.out.println("Could not write the profiles.");
             e.printStackTrace();
+        } finally {
+            try {
+                if (bufferedWriter != null) {
+                    bufferedWriter.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
-
-
 }

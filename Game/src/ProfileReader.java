@@ -12,10 +12,15 @@ public class ProfileReader {
         readFile();
     }
 
-    public void readFile() {
+    public Map<String, Integer> getProfilesMap() {
+        return profilesMap;
+    }
+
+    private void readFile() {
+        FileReader fileReader = null;
         try {
             File profilesFile = new File("userProfiles.txt");
-            FileReader fileReader = new FileReader(profilesFile);
+            fileReader = new FileReader(profilesFile);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = bufferedReader.readLine();
             while (line != null) {
@@ -29,6 +34,14 @@ public class ProfileReader {
         } catch (IOException e) {
             System.out.println("File reading failed.");
             e.printStackTrace();
+        } finally {
+            try {
+                if (fileReader != null) {
+                    fileReader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -42,5 +55,9 @@ public class ProfileReader {
             profilesMap.put(user.substring(0, equalsLoc),
                     Integer.parseInt(user.substring(equalsLoc + 1, user.length() - 1)));
         }
+
+        String lastUser = users[users.length - 1];
+        profilesMap.put(lastUser.substring(0, lastUser.indexOf("=")),
+                Integer.parseInt(lastUser.substring(lastUser.indexOf("=") + 1)));
     }
 }
