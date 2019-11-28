@@ -2,17 +2,17 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProfileReader {
+class ProfileReader {
     private Map<String, Integer> profilesMap;
     private StringBuilder userData;
 
-    public ProfileReader() {
+    ProfileReader() {
         profilesMap = new HashMap<>();
         userData = new StringBuilder();
         readFile();
     }
 
-    public Map<String, Integer> getProfilesMap() {
+    Map<String, Integer> getProfilesMap() {
         return profilesMap;
     }
 
@@ -45,7 +45,7 @@ public class ProfileReader {
         }
     }
 
-    public void putDataIntoMap() {
+    void putDataIntoMap() {
         String data = userData.toString();
         data = data.substring(1, data.length() - 1);
         String[] users = data.split(" ");
