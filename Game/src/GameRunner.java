@@ -4,7 +4,7 @@ public class GameRunner {
         ProfileReader reader = new ProfileReader();
         writer.writeToMap("lucas", 23);
         writer.writeToMap("dion", 14);
-        writer.writeToMap("eric", 13);
+        writer.writeToMap("yegan", 13);
         reader.putDataIntoMap();
         System.out.println(reader.getProfilesMap().toString());
     }
