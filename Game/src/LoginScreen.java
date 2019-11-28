@@ -2,14 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 public class LoginScreen extends JFrame implements ActionListener {
     private String userName;
     private JButton OKButton;
     private JTextField nameField;
 
-    LoginScreen() throws IOException {
+    LoginScreen() {
         this.setSize(480, 640);
         this.setResizable(false);
         this.setTitle("Welcome to HiLo!");
