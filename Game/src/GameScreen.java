@@ -2,11 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class GameScreen extends JFrame implements ActionListener {
-    private JButton guessButton;
-    private int guess;
     private JTextField guessField;
+    private JLabel levelNum, hilo, triesLeft;
+    private Random random;
+    private int guessCount, trueNum, guessLimit, level;
 
     GameScreen() {
         this.setSize(480, 640);
@@ -23,12 +25,12 @@ public class GameScreen extends JFrame implements ActionListener {
         contentPane.add(HiLoPanel);
         HiLoPanel.setBounds(65, 40, 350, 300);
 
-        JLabel levelNum = new JLabel("LEVEL 1");
+        levelNum = new JLabel("LEVEL 1");
         levelNum.setFont(new Font("Level font", Font.PLAIN, 18));
         HiLoPanel.add(levelNum);
         levelNum.setBounds(20, 10, 150, 50);
 
-        JLabel hilo = new JLabel("Hi");
+        hilo = new JLabel("");
         hilo.setFont(new Font("HILO font", Font.ITALIC, 250));
         HiLoPanel.add(hilo);
         hilo.setBounds(40, 20, 300, 300);
@@ -44,34 +46,71 @@ public class GameScreen extends JFrame implements ActionListener {
         guessPan.add(guessField);
         guessField.setBounds(50, 30, 150, 40);
 
-        guessButton = new JButton("GUESS!");
+        JButton guessButton = new JButton("GUESS!");
         guessButton.setFont(new Font("Button font", Font.PLAIN, 15));
         guessButton.addActionListener(this);
         guessPan.add(guessButton);
         guessButton.setBounds(210, 30, 100, 40);
 
-        JLabel triesLeft = new JLabel("You have 3 tries left!");
+        triesLeft = new JLabel("");
         triesLeft.setFont(new Font("Tries font", Font.PLAIN, 20));
         contentPane.add(triesLeft);
         triesLeft.setBounds(130, 480, 350, 100);
 
+        random = new Random();
+        guessLimit = 10;
+        level = 1;
+        trueNum = random.nextInt(100);
     }
 
-    public static void main(String[] args) {
-        GameScreen gameScreen = new GameScreen();
-        gameScreen.setVisible(true);
+    public int getLevel() {
+        return level;
     }
-
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (event.getSource() == guessButton) {
-            try {
-                guess = Integer.parseInt(guessField.getText());
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Please enter numbers as digits!",
-                        "Number Error", JOptionPane.ERROR_MESSAGE);
-            }
+        guessCount++;
+        levelNum.setText("LEVEL " + level);
+        guessLimit = 11 - level;
+        int guess = 0;
+        triesLeft.setBounds(130, 480, 350, 100);
+        System.out.println(trueNum);
+
+        try {
+            guess = Integer.parseInt(guessField.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please enter your numbers as digits!",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        boolean nextLevel = false;
+        if (guess == trueNum) {
+            level++;
+            levelNum.setText("LEVEL " + level);
+            trueNum = random.nextInt(100);
+            hilo.setText("Lv");
+            guessCount = 0;
+            nextLevel = true;
+        } else if (guess < trueNum) {
+            hilo.setText("Lo");
+        } else {
+            hilo.setText("Hi");
+        }
+
+        if (nextLevel) {
+            triesLeft.setBounds(80, 480, 350, 100);
+            triesLeft.setText("Congrats! You reached LEVEL " + level);
+        } else {
+            triesLeft.setText("You have " + (guessLimit - guessCount) + " tries left!");
+        }
+
+        guessField.setText(null);
+        guessField.requestFocus();
+
+        if (guessCount >= guessLimit) {
+            this.setVisible(false);
+            JOptionPane.showMessageDialog(null, "Thanks for playing! You reached level " +
+                    level, "Very Nice!", JOptionPane.PLAIN_MESSAGE);
         }
     }
 }

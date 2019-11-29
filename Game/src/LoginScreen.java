@@ -44,6 +44,10 @@ public class LoginScreen extends JFrame implements ActionListener {
         OKButton.setBounds(230, 45, 70, 40);
     }
 
+    public static void main(String[] args) {
+        LoginScreen loginScreen = new LoginScreen();
+        loginScreen.setVisible(true);
+    }
     public String getUserName() {
         return this.userName;
     }
