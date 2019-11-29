@@ -6,5 +6,5 @@ If you don't guess the number in a limited amout of tries, you lose the game.
 The game stores the user's profiles (name and data) into a HashMap, and then writes the HashMap into `userProfiles.txt` as a single String. It then uses a BufferedReader to read as well as parse the text file and reads it into a HashMap. This allows the user to store their progress.
 
 ![Thanksgiving](/Thanksgiving.jpg)
-Made this while sick during Thanksgiving day, 2019
+Made this while sick during Thanksgiving day, 2019  
 West Lafayette, Indiana
