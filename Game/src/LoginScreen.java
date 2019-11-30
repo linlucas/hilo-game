@@ -5,10 +5,20 @@ import java.awt.event.ActionListener;
 
 public class LoginScreen extends JFrame implements ActionListener {
     private String userName;
-    private JButton OKButton;
     private JTextField nameField;
 
+    public static void main(String[] args) {
+        LoginScreen login = new LoginScreen();
+        login.setVisible(true);
+    }
+
     LoginScreen() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         this.setSize(480, 640);
         this.setResizable(false);
         this.setTitle("Welcome to HiLo!");
@@ -37,25 +47,24 @@ public class LoginScreen extends JFrame implements ActionListener {
         buttonsPanel.add(nameField);
         nameField.setBounds(70, 45, 150, 40);
 
-        OKButton = new JButton("OK");
+        JButton OKButton = new JButton("OK");
         OKButton.addActionListener(this);
         OKButton.setFont(new Font("OK font", Font.BOLD, 22));
         buttonsPanel.add(OKButton);
         OKButton.setBounds(230, 45, 70, 40);
     }
 
-    public static void main(String[] args) {
-        LoginScreen loginScreen = new LoginScreen();
-        loginScreen.setVisible(true);
-    }
     public String getUserName() {
         return this.userName;
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (event.getSource() == OKButton) {
-            userName = nameField.getText();
-        }
+        userName = nameField.getText();
+        this.setVisible(false);
+        JOptionPane.showMessageDialog(null, "I'm thinking of a number between 0 " +
+                "and 100, guess what it is?", "Let's play a game", JOptionPane.INFORMATION_MESSAGE);
+        GameScreen gameScreen = new GameScreen();
+        gameScreen.setVisible(true);
     }
 }

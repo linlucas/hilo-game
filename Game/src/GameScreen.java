@@ -11,6 +11,12 @@ public class GameScreen extends JFrame implements ActionListener {
     private int guessCount, trueNum, guessLimit, level;
 
     GameScreen() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         this.setSize(480, 640);
         this.setResizable(false);
         this.setTitle("HiLo Game");
