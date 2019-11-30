@@ -80,7 +80,6 @@ public class GameScreen extends JFrame implements ActionListener {
         guessLimit = 11 - level;
         int guess = 0;
         triesLeft.setBounds(130, 480, 350, 100);
-        System.out.println(trueNum);
 
         try {
             guess = Integer.parseInt(guessField.getText());
