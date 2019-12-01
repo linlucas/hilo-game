@@ -1,6 +1,5 @@
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 class ProfileReader {
     private Map<String, Integer> profilesMap;
@@ -12,8 +11,12 @@ class ProfileReader {
         readFile();
     }
 
-    Map<String, Integer> getProfilesMap() {
-        return profilesMap;
+    TreeMap<Integer, String> getProfilesMap() {
+        TreeMap<Integer, String> sortedMap = new TreeMap<>();
+        for (Map.Entry<String, Integer> entry : profilesMap.entrySet()) {
+            sortedMap.put(entry.getValue(), entry.getKey());
+        }
+        return sortedMap;
     }
 
     private void readFile() {

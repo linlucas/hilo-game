@@ -64,7 +64,7 @@ public class LoginScreen extends JFrame implements ActionListener {
         this.setVisible(false);
         JOptionPane.showMessageDialog(null, "I'm thinking of a number between 0 " +
                 "and 100, guess what it is?", "Let's play a game", JOptionPane.INFORMATION_MESSAGE);
-        GameScreen gameScreen = new GameScreen();
+        GameScreen gameScreen = new GameScreen(userName);
         gameScreen.setVisible(true);
     }
 }

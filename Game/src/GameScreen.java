@@ -9,8 +9,9 @@ public class GameScreen extends JFrame implements ActionListener {
     private JLabel levelNum, hilo, triesLeft;
     private Random random;
     private int guessCount, trueNum, guessLimit, level;
+    private String username;
 
-    GameScreen() {
+    GameScreen(String user) {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (Exception e) {
@@ -67,6 +68,8 @@ public class GameScreen extends JFrame implements ActionListener {
         guessLimit = 10;
         level = 1;
         trueNum = random.nextInt(100);
+
+        username = user;
     }
 
     public int getLevel() {
@@ -114,8 +117,12 @@ public class GameScreen extends JFrame implements ActionListener {
 
         if (guessCount >= guessLimit) {
             this.setVisible(false);
+            ProfileWriter writer = new ProfileWriter();
+            writer.writeToMap(username, level);
             JOptionPane.showMessageDialog(null, "Thanks for playing! You reached level " +
                     level, "Very Nice!", JOptionPane.PLAIN_MESSAGE);
+            Leaderboard leaderboard = new Leaderboard();
+            leaderboard.setVisible(true);
         }
     }
 }

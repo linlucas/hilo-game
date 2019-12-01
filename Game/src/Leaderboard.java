@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class Leaderboard extends JFrame implements ActionListener {
     private JButton playAgainButton;
@@ -32,19 +34,28 @@ public class Leaderboard extends JFrame implements ActionListener {
         contentPane.add(leadersArea);
         leadersArea.setBounds(40, 70, 400, 400);
         leadersArea.setFont(new Font("Leader font", Font.PLAIN, 20));
-        leadersArea.setText("------Name--------------------------Scores--------\n" +
-                "      Lucas                                      30");
+        leadersArea.setText("------Name--------------------------Scores--------\n");
 
         playAgainButton = new JButton("Play Again");
         playAgainButton.setFont(new Font("Button font", Font.PLAIN, 25));
         contentPane.add(playAgainButton);
+        playAgainButton.addActionListener(this);
         playAgainButton.setBounds(70, 510, 200, 50);
 
         exitButton = new JButton("Exit");
         exitButton.setFont(new Font("Button font", Font.PLAIN, 25));
         contentPane.add(exitButton);
+        exitButton.addActionListener(this);
         exitButton.setBounds(300, 510, 100, 50);
 
+        ProfileReader reader = new ProfileReader();
+        reader.putDataIntoMap();
+        TreeMap<Integer, String> map = reader.getProfilesMap();
+        ArrayList<Integer> keys = new ArrayList<>(map.keySet());
+        for (int i = keys.size() - 1; i >= 0; i--) {
+            leadersArea.append("       " + map.get(keys.get(i)) + "                                  " +
+                    keys.get(i) + "             \n");
+        }
     }
 
     public static void main(String[] args) {
@@ -53,7 +64,13 @@ public class Leaderboard extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-
+    public void actionPerformed(ActionEvent event) {
+        if (event.getSource() == playAgainButton) {
+            this.setVisible(false);
+            LoginScreen login = new LoginScreen();
+            login.setVisible(true);
+        } else if (event.getSource() == exitButton) {
+            System.exit(0);
+        }
     }
 }
