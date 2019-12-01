@@ -5,6 +5,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class writes the HashMap of user data into userProfiles.txt.
+ *
+ * @author Lucas Lin
+ * @version Dec 1, 2019
+ */
 class ProfileWriter {
     private Map<String, Integer> profilesMap;
     private File profilesFile;
@@ -38,7 +44,7 @@ class ProfileWriter {
     private void writeToFile() {
         BufferedWriter bufferedWriter = null;
         try {
-            FileWriter fileWriter = new FileWriter(profilesFile);
+            FileWriter fileWriter = new FileWriter(profilesFile, true);
             bufferedWriter = new BufferedWriter(fileWriter);
             System.out.println("writing to the file");
             bufferedWriter.write(profilesMap.toString());

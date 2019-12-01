@@ -1,6 +1,12 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * This class reads from userProfile.txt and parses the data in it to a TreeMap.
+ *
+ * @author Lucas Lin
+ * @version Dec 1, 2019
+ */
 class ProfileReader {
     private Map<String, Integer> profilesMap;
     private StringBuilder userData;
@@ -55,12 +61,20 @@ class ProfileReader {
 
         for (String user : users) {
             int equalsLoc = user.indexOf("=");
-            profilesMap.put(user.substring(0, equalsLoc),
-                    Integer.parseInt(user.substring(equalsLoc + 1, user.length() - 1)));
+            try {
+                profilesMap.put(user.substring(0, equalsLoc),
+                        Integer.parseInt(user.substring(equalsLoc + 1, user.length() - 1)));
+            } catch (NumberFormatException e) {
+                // do nothing
+            }
         }
 
         String lastUser = users[users.length - 1];
-        profilesMap.put(lastUser.substring(0, lastUser.indexOf("=")),
-                Integer.parseInt(lastUser.substring(lastUser.indexOf("=") + 1)));
+        try {
+            profilesMap.put(lastUser.substring(0, lastUser.indexOf("=")),
+                    Integer.parseInt(lastUser.substring(lastUser.indexOf("=") + 1)));
+        } catch (NumberFormatException e) {
+            // do nothing
+        }
     }
 }

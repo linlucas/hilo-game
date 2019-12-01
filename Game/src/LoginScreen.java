@@ -3,8 +3,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This class displays a login screen and captures the user input which is
+ * their username.
+ *
+ * @author Lucas Lin
+ * @version Dec 1, 2019
+ */
 public class LoginScreen extends JFrame implements ActionListener {
-    private String userName;
+
+    private static final long serialVersionUID = 1L;
     private JTextField nameField;
 
     public static void main(String[] args) {
@@ -54,17 +62,12 @@ public class LoginScreen extends JFrame implements ActionListener {
         OKButton.setBounds(230, 45, 70, 40);
     }
 
-    public String getUserName() {
-        return this.userName;
-    }
-
     @Override
     public void actionPerformed(ActionEvent event) {
-        userName = nameField.getText();
         this.setVisible(false);
         JOptionPane.showMessageDialog(null, "I'm thinking of a number between 0 " +
                 "and 100, guess what it is?", "Let's play a game", JOptionPane.INFORMATION_MESSAGE);
-        GameScreen gameScreen = new GameScreen(userName);
+        GameScreen gameScreen = new GameScreen(nameField.getText());
         gameScreen.setVisible(true);
     }
 }

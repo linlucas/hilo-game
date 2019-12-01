@@ -5,6 +5,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+/**
+ * This class reads from the userProfiles.txt file and displays a leaderboard that is
+ * sorted based on the level in the game that player reached.
+ *
+ * @author Lucas Lin
+ * @version Dec 1, 2019
+ */
 public class Leaderboard extends JFrame implements ActionListener {
     private JButton playAgainButton;
     private JButton exitButton;
@@ -56,11 +63,6 @@ public class Leaderboard extends JFrame implements ActionListener {
             leadersArea.append("       " + map.get(keys.get(i)) + "                                  " +
                     keys.get(i) + "             \n");
         }
-    }
-
-    public static void main(String[] args) {
-        Leaderboard leaderboard = new Leaderboard();
-        leaderboard.setVisible(true);
     }
 
     @Override

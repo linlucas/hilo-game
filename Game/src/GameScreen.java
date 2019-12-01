@@ -4,6 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+/**
+ * Handles the actual game and outputs the max level the user reaches, it also
+ * uses ProfileWriter to write user data to userProfiles.txt.
+ * 
+ * @author Lucas Lin
+ * @version Dec 1, 2019
+ */
 public class GameScreen extends JFrame implements ActionListener {
     private JTextField guessField;
     private JLabel levelNum, hilo, triesLeft;
@@ -70,10 +77,6 @@ public class GameScreen extends JFrame implements ActionListener {
         trueNum = random.nextInt(100);
 
         username = user;
-    }
-
-    public int getLevel() {
-        return level;
     }
 
     @Override
