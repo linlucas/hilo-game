@@ -56,25 +56,14 @@ class ProfileReader {
 
     void putDataIntoMap() {
         String data = userData.toString();
-        data = data.substring(1, data.length() - 1);
-        String[] users = data.split(" ");
+        data = data.substring(0, data.length() - 1);
+        String[] users = data.split("}");
 
         for (String user : users) {
+            int bracesLoc = user.indexOf("{");
             int equalsLoc = user.indexOf("=");
-            try {
-                profilesMap.put(user.substring(0, equalsLoc),
-                        Integer.parseInt(user.substring(equalsLoc + 1, user.length() - 1)));
-            } catch (NumberFormatException e) {
-                // do nothing
-            }
-        }
-
-        String lastUser = users[users.length - 1];
-        try {
-            profilesMap.put(lastUser.substring(0, lastUser.indexOf("=")),
-                    Integer.parseInt(lastUser.substring(lastUser.indexOf("=") + 1)));
-        } catch (NumberFormatException e) {
-            // do nothing
+            profilesMap.put(user.substring(bracesLoc + 1, equalsLoc),
+                    Integer.parseInt(user.substring(equalsLoc + 1)));
         }
     }
 }
