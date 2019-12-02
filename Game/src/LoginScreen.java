@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
  */
 public class LoginScreen extends JFrame implements ActionListener {
 
-    private static final long serialVersionUID = 1L;
     private JTextField nameField;
 
     public static void main(String[] args) {
