@@ -1,4 +1,4 @@
-## Let's play HiLo!
+# Let's play HiLo!
 The objective of the game is to guess the correct number, which is a random integer from 0 to 100.
 Once you made the correct guess, you progress onto the next level.
 If you don't guess the number in a limited amout of tries, you lose the game.
