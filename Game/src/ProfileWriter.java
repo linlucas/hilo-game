@@ -33,7 +33,7 @@ class ProfileWriter {
                 fileMade = profilesFile.createNewFile();
             }
         } catch (IOException e) {
-            System.out.println("File could not be made");
+            System.err.println("File could not be made");
             e.printStackTrace();
         }
         if (fileMade) {
@@ -42,24 +42,12 @@ class ProfileWriter {
     }
 
     private void writeToFile() {
-        BufferedWriter bufferedWriter = null;
-        try {
-            FileWriter fileWriter = new FileWriter(profilesFile, true);
-            bufferedWriter = new BufferedWriter(fileWriter);
-            System.out.println("writing to the file");
-            bufferedWriter.write(profilesMap.toString());
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(profilesFile, true))) {
+            writer.write(profilesMap.toString());
 
         } catch (IOException e) {
-            System.out.println("Could not write the profiles.");
+            System.err.println("Could not write the profiles.");
             e.printStackTrace();
-        } finally {
-            try {
-                if (bufferedWriter != null) {
-                    bufferedWriter.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

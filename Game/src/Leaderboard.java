@@ -41,7 +41,7 @@ public class Leaderboard extends JFrame implements ActionListener {
         contentPane.add(leadersArea);
         leadersArea.setBounds(40, 70, 400, 400);
         leadersArea.setFont(new Font("Leader font", Font.PLAIN, 20));
-        leadersArea.setText("------Name--------------------------Scores--------\n");
+        leadersArea.setText("------Name-------------Scores--------\n");
 
         playAgainButton = new JButton("Play Again");
         playAgainButton.setFont(new Font("Button font", Font.PLAIN, 25));

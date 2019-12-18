@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Random;
 
 /**
@@ -15,7 +17,7 @@ public class GameScreen extends JFrame implements ActionListener {
     private JTextField guessField;
     private JLabel levelNum, hilo, triesLeft;
     private Random random;
-    private int guessCount, trueNum, guessLimit, level;
+    private int guessCount, trueNum, guessLimit, level, guess;
     private String username;
 
     GameScreen(String user) {
@@ -60,6 +62,20 @@ public class GameScreen extends JFrame implements ActionListener {
         guessPan.add(guessField);
         guessField.setBounds(50, 30, 150, 40);
 
+        // TODO, add enter keyListener to the game
+        guessField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    try {
+                        guess = Integer.parseInt(guessField.getText());
+                    } catch (NumberFormatException nfe) {
+                        nfe.printStackTrace();
+                    }
+                }
+            }
+        });
+
         JButton guessButton = new JButton("GUESS!");
         guessButton.setFont(new Font("Button font", Font.PLAIN, 15));
         guessButton.addActionListener(this);
@@ -84,7 +100,7 @@ public class GameScreen extends JFrame implements ActionListener {
         guessCount++;
         levelNum.setText("LEVEL " + level);
         guessLimit = 11 - level;
-        int guess = 0;
+        guess = 0;
         triesLeft.setBounds(130, 480, 350, 100);
 
         try {
@@ -111,6 +127,7 @@ public class GameScreen extends JFrame implements ActionListener {
         if (nextLevel) {
             triesLeft.setBounds(80, 480, 350, 100);
             triesLeft.setText("Congrats! You reached LEVEL " + level);
+            JOptionPane.showMessageDialog(null, "Congrats, proceed to the next level!");
         } else {
             triesLeft.setText("You have " + (guessLimit - guessCount) + " tries left!");
         }

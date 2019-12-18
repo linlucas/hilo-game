@@ -25,47 +25,19 @@ class ProfileReader {
         return sortedMap;
     }
 
-//    private void readFile() {
-//        FileReader fileReader = null;
-//        try {
-//            File profilesFile = new File("userProfiles.txt");
-//            fileReader = new FileReader(profilesFile);
-//            BufferedReader bufferedReader = new BufferedReader(fileReader);
-//            String line = bufferedReader.readLine();
-//            while (line != null) {
-//                userData.append(line);
-//                line = bufferedReader.readLine();
-//            }
-//
-//        } catch (FileNotFoundException e) {
-//            System.out.println("profilesFile does not exist!");
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            System.out.println("File reading failed.");
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if (fileReader != null) {
-//                    fileReader.close();
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-
     private void readFile() {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("userProfiles.txt")))){
-            String line = bufferedReader.readLine();
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File("userProfiles.txt")))){
+            String line = reader.readLine();
             while (line != null){
                 userData.append(line);
-                line = bufferedReader.readLine();
+                line = reader.readLine();
             }
+
         } catch (FileNotFoundException e) {
-            System.out.println("profilesFile.txt does not exist!");
+            System.err.println("profilesFile.txt does not exist!");
             e.printStackTrace();
         } catch (IOException e) {
-            System.out.println("File reading failed!");
+            System.err.println("File reading failed!");
             e.printStackTrace();
         }
     }

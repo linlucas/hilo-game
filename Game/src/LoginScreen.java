@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
  * @version Dec 1, 2019
  */
 public class LoginScreen extends JFrame implements ActionListener {
-
     private JTextField nameField;
 
     public static void main(String[] args) {
@@ -34,7 +33,7 @@ public class LoginScreen extends JFrame implements ActionListener {
         Container contentPane = this.getContentPane();
         contentPane.setLayout(null);
 
-        JLabel image = new JLabel(new ImageIcon("HiLoIcon.jpg"));
+        JLabel image = new JLabel(new ImageIcon("Pictures/HiLoIcon.jpg"));
         contentPane.add(image);
         image.setBounds(65, 30, 350, 350);
 
