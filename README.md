@@ -8,5 +8,5 @@ The game stores the user's profiles (name and data) into a HashMap, and then wri
 Clone this GitHub repo onto your computer, open a modern IDE that supports Java 9, and then run the main method in the `LoginScreen.java` class to play the game!  
 
 ![Thanksgiving](/Pictures/ThanksgivingTiny.jpg)  
-Made while sick during Thanksgiving break, 2019.  
+Made during Thanksgiving break, 2019.  
 West Lafayette, Indiana
